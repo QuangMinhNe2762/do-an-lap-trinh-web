@@ -1,0 +1,438 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @*<link rel="stylesheet" href="~/css/navigation.css" />*@
+    <link rel="stylesheet" href="~/css/Products.css" />
+    <link rel="stylesheet" href="~/css/Home.css" />
+    <link rel="stylesheet" href="~/css/ProductDetail.css" />
+    @*<link rel="stylesheet" href="~/css/"*@
+    <style>
+        .text-search {
+            width: 300px;
+            height:30px;
+            border-radius: 20px;
+            border: 2px solid;
+        }
+        .margin{
+            margin-right:0;
+        }
+        .font {
+            font-family: 'Poppins', sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            max-width: 1300px;
+            margin: auto;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+
+        nav {
+            flex: 1;
+            text-align: right;
+        }
+
+            nav ul {
+                display: inline-block;
+                list-style-type: none;
+            }
+
+                nav ul li {
+                    display: inline-block;
+                    margin-right: 20px;
+                }
+
+        .navigation-item:hover {
+            color: #1E34FF;
+        }
+
+        a {
+            text-decoration: none;
+            color: #555;
+        }
+
+        p {
+            color: #555;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .col-2 {
+            flex-basis: 50%;
+            min-width: 300px;
+        }
+
+            .col-2 img {
+                max-width: 100%;
+                padding: 50px 0;
+            }
+
+            .col-2 h1 {
+                font-size: 50px;
+                line-height: 60px;
+                margin: 25px 0;
+            }
+
+        .menu-icon {
+            margin-left: 10px;
+        }
+
+        .playYourWay .row {
+            background: radial-gradient(ellipse at left, #1E34FF, transparent), radial-gradient(ellipse at right, #C55EFF, transparent);
+        }
+
+        .exploreNow {
+            margin-left: 111px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #00D5FF;
+            color: black;
+            padding: 8px 30px;
+            margin: 30px 0;
+            border-radius: 30px;
+            transition: background 0.5s;
+        }
+
+            .btn:hover {
+                background: #BDBDBD;
+            }
+
+        .header .row {
+            margin-top: 70px;
+        }
+        /*-----footer-----*/
+        .footer {
+            background: #000;
+            color: #8a8a8a;
+            font-size: 14px;
+            padding: 60px 0 20px;
+        }
+
+            .footer p {
+                color: #8a8a8a;
+            }
+
+            .footer h3 {
+                color: #fff;
+                margin-bottom: 20px;
+            }
+
+        .footer-col-1, .footer-col-2, .footer-col-3, .footer-col-4 {
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col-1 {
+            flex-basis: 30%;
+            margin-left: 111px;
+        }
+
+        .footer-col-2 {
+            flex: 1;
+            text-align: center;
+            width: 300px;
+        }
+
+            .footer-col-2 img {
+                width: 180px;
+                margin-bottom: 20px;
+            }
+
+        .footer-col-3, .footer-col-4 {
+            flex-basis: 12%;
+            text-align: center;
+        }
+
+        .footer-col-4 {
+            margin-right: 111px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .app-logo {
+            margin-top: 20px;
+        }
+
+            .app-logo img {
+                width: 140px;
+            }
+
+        .footer hr {
+            border: none;
+            background: black;
+            height: 1px;
+            margin: 20px 0;
+        }
+
+        .copyright {
+            text-align: center;
+        }
+
+        .menu-icon {
+            width: 28px;
+            margin-left: 20px;
+        }
+
+        $background-color: #2A2E37;
+        $search-bg-color: #242628;
+        $icon-color: #00FEDE;
+        $transition: all .5s ease;
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: $background-color;
+        }
+
+        .search {
+            width: 100px;
+            height: 100px;
+            margin: 40px auto 0;
+            background-color: $search-bg-color;
+            position: relative;
+            overflow: hidden;
+            transition: $transition;
+            &:before
+
+        {
+            content: '';
+            display: block;
+            width: 3px;
+            height: 100%;
+            position: relative;
+            background-color: $icon-color;
+            transition: $transition;
+        }
+
+        &.open {
+            width: 420px;
+            &:before
+
+        {
+            height: 60px;
+            margin: 20px 0 20px 30px;
+            position: absolute;
+        }
+
+        }
+        }
+
+        .search-box {
+            width: 100%;
+            height: 100%;
+            box-shadow: none;
+            border: none;
+            background: transparent;
+            color: #fff;
+            padding: 20px 100px 20px 45px;
+            font-size: 40px;
+            &:focus
+
+        {
+            outline: none;
+        }
+
+        }
+
+        .search-button {
+            width: 100px;
+            height: 100px;
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .search-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            border: 3px solid $icon-color;
+            display: block;
+            position: relative;
+            margin-left: 5px;
+            transition: $transition;
+            &:before
+
+        {
+            content: '';
+            width: 3px;
+            height: 15px;
+            position: absolute;
+            right: -2px;
+            top: 30px;
+            display: block;
+            background-color: $icon-color;
+            transform: rotate(-45deg);
+            transition: $transition;
+        }
+
+        &:after {
+            content: '';
+            width: 3px;
+            height: 15px;
+            position: absolute;
+            right: -12px;
+            top: 40px;
+            display: block;
+            background-color: $icon-color;
+            transform: rotate(-45deg);
+            transition: $transition;
+        }
+
+        .open & {
+            margin: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 60px;
+            &:before
+
+        {
+            transform: rotate(52deg);
+            right: 22px;
+            top: 23px;
+            height: 18px;
+        }
+
+        &:after {
+            transform: rotate(-230deg);
+            right: 22px;
+            top: 13px;
+            height: 18px;
+        }
+
+        }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        @using (Html.BeginForm("ProDucts", "Home", FormMethod.Post))
+        {
+            <div class="container">
+                <div class="navbar">
+                    <div class="logo">
+                        <a href='@Url.Action("trangChu", "Home")'><img src='@Url.Content("~/Content/img/index/Logitech-Logo-Vector-730x730.png")' width="125px" /></a>
+                    </div>
+                    <nav>
+                        <ul id="MenuItems">
+                            <li class="margin"><input name="txt_Search" class="text-search" type="search"placeholder="   Search..." /></li>
+                            <li><button class="btn" style="border:none">Search</button></li>
+                            @if (ViewBag.login == null)
+                            {
+                                <li>@Html.ActionLink("Home", "trangChu", "Home", new { @class = "navigation-item" })</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Home", "trangChu", "Home", new { @class = "navigation-item" })</li>
+                            }
+                            <li>@Html.ActionLink("Products", "ProDucts", "Home", new { @class = "navigation-item" })</li>
+                            <li>@Html.ActionLink("About", "About", "Home", new { @class = "navigation-item" })</li>
+                            @if (ViewBag.admin == "admin")
+                            {
+                                <li>@Html.ActionLink("Product Management", "ProManage", "Home", new { @class = "navigation-item" })</li>
+                            }
+                            else
+                            {
+                                <li><a href="">Contact</a></li>
+                            }
+
+                            @if (ViewBag.login == null)
+                            {
+                                <li class="font">@Html.ActionLink("Account", "Account", "Home", new { @class = "navigation-item" })</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Profile", "DetailProfile", "Home", new { @class = "navigation-item" })</li>
+                            }
+                            <li><a href="@Url.Action("pageGioHang", "Home")"><img src="~/Content/img/index/cart.png" width="30px" height="30px"></a></li>
+                            <li><a><img src="~/Content/img/index/menu.png" class="menu-icon" width="30px" height="30px" onclick="menutoggle"></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        }
+    </div>
+    @RenderBody()
+    <div class="footer" style="height:624px">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and Ios mobile phone</p>
+                    <div class="app-logo">
+                        <img src="~/Content/img/index/play-store.png">
+                        <img src="~/Content/img/index/app-store.png">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="~/Content/img/index/logitech2.png">
+                    <p>Download App for Android and Ios mobile phone</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Link</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">© 2022 Logitech. Bảo lưu mọi quyền<br>Hàng Fake Make By M</p>
+        </div>
+    </div>
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "Opx";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+
+            }
+        }
+        $('.search-button').click(function () {
+            $(this).parent().toggleClass('open');
+        });
+    </script>
+</body>
+</html>

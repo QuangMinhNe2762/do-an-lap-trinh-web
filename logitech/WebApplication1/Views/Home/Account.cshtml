@@ -1,0 +1,161 @@
+﻿@model WebApplication1.Models.Account
+@{
+    ViewBag.Title = "Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link rel="stylesheet" href="~/css/account-page1.css" />*@
+<style>
+    .account-page {
+        padding: 50px 0;
+        background: radial-gradient(ellipse at left, #1E34FF, transparent), radial-gradient(ellipse at right, #C55EFF, transparent);
+    }
+
+    .form-container {
+        background: #fff;
+        width: 300px;
+        height: 400px;
+        position: relative;
+        text-align: center;
+        padding: 20px 0;
+        margin: auto;
+        box-shadow: rgb(123,115,254) 5px 5px, rgb(178,158,255) 10px 10px, rgb(166,156,254) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+        overflow: hidden;
+    }
+
+        .form-container span {
+            font-weight: bold;
+            padding: 0 10px;
+            color: #555;
+            cursor: pointer;
+            width: 100px;
+            display: inline-block;
+        }
+
+    .form-btn {
+        display: inline-block;
+    }
+
+    .form-container form {
+        max-width: 300px;
+        padding: 0 20px;
+        position: absolute;
+        top: 60px;
+        transition: transform 0.5s;
+    }
+
+    form input {
+        width: 100%;
+        height: 30px;
+        margin: 10px 0;
+        padding: 0 10px;
+        border: 1px solid #ccc;
+    }
+
+    form .btn {
+        width: 100%;
+        border: none;
+        cursor: pointer;
+        margin: 10px 0;
+    }
+
+        form .btn:focus {
+            outline: none;
+        }
+
+    #LoginForm {
+        left: -300px;
+    }
+
+    #RegForm {
+        left: 0;
+    }
+
+    #Indicator {
+        width: 100px;
+        border: none;
+        background: #0040FF;
+        height: 3px;
+        margin-top: 8px;
+        transform: translateX(100px);
+        transition: transform 0.5s;
+    }
+
+    #errorLogin {
+        color: transparent;
+    }
+
+    .textboxfor {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .errorMesL {
+        font-family: Lucida Bright;
+        font-size: small;
+    }
+
+    #RegForm {
+        width: 300px;
+    }
+</style>
+<title>@ViewBag.Title</title>
+<!----- account-page ------>
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="~/Content/img/index/play_your_way-removebg-preview.png" width="100%">
+            </div>
+            <div class="col-2">
+                <div class="form-container">
+                    <div class="form-btn">
+                        <span onclick="login()">Login</span>
+                        <span onclick="register()">Register</span>
+                        <hr id="Indicator">
+                    </div>
+
+                    @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "LoginForm" }))
+                    {
+                        @Html.TextBoxFor(model => model.userName, "", new { type = "text", placeholder = "Username", @class = "textboxfor" })
+                        <span class="errorMesL" style="color: red;text-align:left;padding: 0px;width: 250px">@ViewBag.username</span>
+                        @Html.TextBoxFor(model => model.PassWord, "", new { type = "password", placeholder = "PassWord", @class = "textboxfor" })
+                        <span class="errorMesL" style="color: red;text-align:left;padding: 0px;width: 250px">@ViewBag.password</span>
+                        <button type="submit" class="btn">Login</button>
+                        <a href="">Forgot password</a>
+                    }
+
+                    @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { id = "RegForm" }))
+                    {
+
+                        @Html.TextBoxFor(model => model.RuserName, "", new { type = "text", placeholder = "Username", @class = "textboxfor" })
+                        <span class="errorMesL" style="color: red;text-align:left;padding: 0px;width: 250px">@ViewBag.Rusername</span>
+
+                        @Html.TextBoxFor(model => model.RpassWord, "", new { type = "password", placeholder = "PassWord", @class = "textboxfor" })
+                        <span class="errorMesL" style="color: red;text-align:left;padding: 0px;width: 250px">@ViewBag.Rpassword</span>
+
+                        @Html.TextBoxFor(model => model.Remail, "", new { type = "text", placeholder = "Email", @class = "textboxfor" })
+                        <span class="errorMesL" style="color: red;text-align:left;padding: 0px;width: 250px">@ViewBag.Remail</span>
+
+                        <button type="submit" class="btn">Register</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--- js for toggle form ---->
+<script>
+    var LoginForm = document.getElementById("LoginForm");
+    var RegForm = document.getElementById("RegForm");
+    var Indicator = document.getElementById("Indicator");
+    function register() {
+        RegForm.style.transform = "translateX(0px)";
+        LoginForm.style.transform = "translateX(0px)";
+        Indicator.style.transform = "translateX(100px)";
+    }
+    function login() {
+        RegForm.style.transform = "translateX(300px)";
+        LoginForm.style.transform = "translateX(300px)";
+        Indicator.style.transform = "translateX(0px)";
+    }
+</script>

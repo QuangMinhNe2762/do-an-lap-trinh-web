@@ -1,0 +1,119 @@
+﻿@model WebApplication1.Models.sanPham
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .btn {
+        border: none;
+        font-weight: bold;
+        color: black;
+    }
+
+    .btnadded {
+        display: inline-block;
+        color: black;
+        font-weight: bold;
+        padding: 8px 30px;
+        margin: 30px 0;
+        border-radius: 30px;
+        background-color: lightgray;
+        border: none;
+    }
+</style>
+<title>ProductDetail</title>
+
+<div class="small-container single-product">
+    <div class="row">
+
+        <div class="col-2">
+            <img src="@Url.Content("~/Content/img/gallery/(1)" + Model.anhSP)" width="100%" id="ProductImg">
+            <div class="small-img-row">
+                <div class="small-img-col">
+                    <img src="@Url.Content("~/Content/img/gallery/(1)" + Model.anhSP)" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="@Url.Content("~/Content/img/gallery/(2)" + Model.anhSP)" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="@Url.Content("~/Content/img/gallery/(3)" + Model.anhSP)" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="@Url.Content("~/Content/img/gallery/(4)" + Model.anhSP)" width="100%" class="small-img">
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <h2>@Model.tenSP</h2>
+            <p>Loại Sản Phẩm:@Model.loaiSP</p>
+            <h4>$@Model.giaSP</h4>
+            @if (ViewBag.daThemVaoGioHang == "true")
+            {
+                using (Html.BeginForm("removePRFrChuaDN", "Home", new { Model.maSP, Model.tenSP, Model.giaSP, Model.anhSP, Model.loaiSP, Model.moTa }, FormMethod.Post))
+                {
+                    @Html.TextBoxFor(model => model.soluong, new { @Value = "1", type = "number" })
+                    <p>Quantity:@Model.soluong</p>
+                    <button class="btnadded">Added to cart</button>
+                    <button class="btn"><a href="@Url.Action("ProDucts")"> Back to ProDucts</a></button>
+                }
+            }
+            else
+            {
+                if (Model.soluong > 0)
+                {
+                    using (Html.BeginForm("add_pro_to_cart", "Home", new { Model.maSP, Model.tenSP, Model.giaSP, Model.anhSP, Model.loaiSP, Model.moTa }, FormMethod.Post))
+                    {
+                        @Html.TextBoxFor(model => model.soluong, new { @Value = "1", type = "number" })
+                        <label style="color:red">@ViewBag.error</label>
+                        <p>Quantity:@Model.soluong</p>
+                        <button class="btn">Add to cart</button>
+                        <button class="btn" disabled><a href="@Url.Action("ProDucts")"> Back to ProDucts</a></button>
+                    }
+                }
+                else
+                {
+                    <label style="color:red"><strong>SOLD OUT</strong></label>
+                    <button class="btn" disabled><a href="@Url.Action("ProDucts")"> Back to ProDucts</a></button>
+                }
+            }
+            <h3>Product Detail <i class="fa fa-indent"></i></h3><br>
+            <p>@Model.moTa</p>
+        </div>
+    </div>
+</div>
+<!------title----->
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Similar Product</h2>
+        <p>View More</p>
+    </div>
+</div>
+<!------products----->
+<div class="small-container">
+    <div class="row">
+        @foreach (var item in ViewBag.listSPCungLoai)
+        {
+            <div class="col-4">
+                <a href='@Url.Action("ProductDetail", "Home",new {item.tenSP,item.maSP,item.loaiSP,item.giaSP,item.anhSP,item.moTa})'><img src='@Url.Content("~/Content/img/Products/" +item.anhSP )' /></a>
+                <a href='@Url.Action("ProductDetail", "Home",new {item.tenSP,item.maSP,item.loaiSP,item.giaSP,item.anhSP,item.moTa})'><h4>@item.tenSP</h4></a>
+                <p>$@item.giaSP</p>
+                <p>Quantity:@item.soluong</p>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    var ProductImg = document.getElementById("ProductImg");
+    var SmallImg = document.getElementsByClassName("small-img");
+    SmallImg[0].onclick = function () {
+        ProductImg.src = SmallImg[0].src;
+    }
+    SmallImg[1].onclick = function () {
+        ProductImg.src = SmallImg[1].src;
+    }
+    SmallImg[2].onclick = function () {
+        ProductImg.src = SmallImg[2].src;
+    }
+    SmallImg[3].onclick = function () {
+        ProductImg.src = SmallImg[3].src;
+    }
+</script>

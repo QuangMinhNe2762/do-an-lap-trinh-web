@@ -1,0 +1,200 @@
+﻿@model IEnumerable<WebApplication1.Models.sanPham>
+@{
+    ViewBag.Title = "ProManage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    table {
+        width: 100%;
+        height: 100%;
+    }
+
+    th {
+        text-align: center;
+        width: 300px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .chieudaiten {
+        width: 100px;
+    }
+
+    td {
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+        font-size: 20px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    tr:hover td {
+        background-color: lightgray;
+    }
+
+    .anhSP {
+        margin-left: 150px;
+    }
+
+    .tenSP {
+        word-break: break-word;
+        padding: 10px;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .deletePr {
+        width: 200px;
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    button {
+        border: none;
+        background-color: white;
+    }
+
+        button:hover {
+            background-color: rgb(200, 200, 200);
+        }
+
+    .spacebutton {
+        margin-right: 60px;
+    }
+
+    .khungTinhTien {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: rgb(230, 230, 230);
+        max-width: 500px;
+        margin-left: 32%;
+    }
+
+    .tenBang {
+        text-align: center;
+    }
+
+    #cost {
+        margin-right: 50px;
+        font-size: 25px;
+    }
+
+    .title {
+        text-align: center;
+        margin: 0 auto 80px;
+        position: relative;
+        line-height: 60px;
+        color: #555;
+        margin-bottom: 40px;
+    }
+
+        .title::after {
+            content: '';
+            background: #00D5FF;
+            width: 80px;
+            height: 5px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+    #tongsotien {
+        margin-left: 10%;
+    }
+
+    .khungbutton {
+        text-align: center;
+    }
+
+    .empty-cart {
+        text-align: center;
+        padding: 50px;
+    }
+
+    .chitiet:hover {
+        background-color: aqua;
+        border-radius: 20px;
+    }
+
+    .search {
+        text-align: center;
+    }
+
+    .searchManaPro {
+        width: 100%;
+        text-align: center;
+    }
+
+    .addPro {
+        width: 100%;
+    }
+</style>
+<title>@ViewBag.Title</title>
+<div class="khungGioHang">
+    <div class="title">
+        <span>
+            <h2>Product Management</h2>
+        </span>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="searchManaPro">
+            <div class="addPro">
+                <button class="btn" disabled><a href="@Url.Action("AddProDuct","Home")">Add ProDuct</a></button>
+            </div>
+            <input name="txtsearch" style="text-align:center" class="text-search" placeholder="search..." />
+            <button class="btn">search</button>
+        </div>
+
+    }
+    <table>
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th class="chieudaiten">Quantity</th>
+            <th class="chieudaiten">Price</th>
+            <th style="text-align:left;width:10px;"><pre style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; width:200px;margin:0">Delete         Edit          DeTail</pre></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="doimau">
+                    <div class="anhSP">
+                        <img src="@Url.Content("~/Content/img/Products/" + item.anhSP)" width="100px" height="120px" />
+                    </div>
+                </td>
+                <td>
+                    <div class="tenSP">
+                        <p>
+                            @item.tenSP
+                        </p>
+                    </div>
+                </td>
+                <td>
+                    <div class="soluong">
+                        <p>@item.soluong</p>
+                    </div>
+                </td>
+                <td>
+                    <div class="giaPr">
+                        <p>$@item.giaSP</p>
+                    </div>
+                </td>
+                <td style="width:200px;">
+                    <div class="deletePr">
+                        <button class="spacebutton" disabled>
+                            <a href='@Url.Action("DeletePro", "Home", new { item.maSP })'><img src="~/Content/img/index/close.png"></a>
+                        </button>
+                        <button disabled>
+                            <a href="@Url.Action("Edit","Home",new {item.maSP, item.tenSP, item.giaSP, item.anhSP, item.loaiSP, item.moTa,item.soluong})"><img src="~/Content/img/index/edit.png" /></a>
+                        </button>
+                        <a style="margin-left:50px;" href="@Url.Action("ProductDetail", "Home", new { item.maSP, item.tenSP, item.giaSP, item.anhSP, item.loaiSP, item.moTa,item.soluong })"><img src="~/Content/img/index/right.png" class="chitiet" /></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

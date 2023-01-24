@@ -1,0 +1,199 @@
+﻿@model IEnumerable<WebApplication1.Models.chiTietHoaDon>
+
+@{
+    ViewBag.Title = "InvoiceDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    table {
+        width: 100%;
+        height: 100%;
+    }
+
+    th {
+        text-align: center;
+        width: 300px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .chieudaiten {
+        width: 100px;
+    }
+
+    td {
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+        font-size: 20px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    tr:hover td {
+        background-color: lightgray;
+    }
+
+    .anhSP {
+    }
+
+    .tenSP {
+        word-break: break-word;
+        padding: 10px;
+    }
+
+    input {
+        width: 50px;
+        border: none;
+        border-bottom: 2px solid black;
+        font-size: 20px;
+    }
+
+    /*input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }*/
+
+    .deletePr {
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    button {
+        border: none;
+        background-color: white;
+    }
+
+        button:hover {
+            background-color: rgb(200, 200, 200);
+        }
+
+    .spacebutton {
+        margin-right: 70px;
+    }
+
+    .khungTinhTien {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: rgb(230, 230, 230);
+        max-width: 500px;
+        margin-left: 32%;
+    }
+
+    .tenBang {
+        text-align: center;
+    }
+
+    #cost {
+        margin-right: 50px;
+        font-size: 25px;
+    }
+
+    .title {
+        text-align: center;
+        margin: 0 auto 80px;
+        position: relative;
+        line-height: 60px;
+        color: #555;
+        margin-bottom: 40px;
+    }
+
+        .title::after {
+            content: '';
+            background: #00D5FF;
+            width: 80px;
+            height: 5px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+    #tongsotien {
+        margin-left: 10%;
+    }
+
+    .khungbutton {
+        text-align: center;
+    }
+
+    .empty-cart {
+        text-align: center;
+    }
+
+    .paymentHis {
+        text-align: center;
+    }
+
+    .giaPr {
+        text-align: left;
+    }
+</style>
+@if (!Model.Any())
+{
+    <h1 style="text-align:center">không có sản phẩm đã thanh toán</h1>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+}
+else
+{
+<div style="text-align:center">
+    <button class="btn"  disabled><a href="@Url.Action("paymentHis", "Home")">back to Payment History</a></button>
+</div>
+    <div class="khungGioHang">
+        <table>
+            <tr>
+                <th class="chieudaiten">Image Product</th>
+                <th class="chieudaiten">Name Product</th>
+                <th class="chieudaiten">Price</th>
+                <th class="chieudaiten">Quantity</th>
+                <th class="chieudaiten">Subtotal</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="doimau">
+                        <div class="anhSP">
+                            <img src="~/Content/img/Products/@item.anhsp" width="100px" height="120px" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tenSP">
+                            <p>@item.tensp</p>
+                        </div>
+                    </td>
+                    <td>
+
+                        <div class="soluong">
+                            <p>@item.dongia</p>
+                        </div>
+
+                    </td>
+                    <td>
+
+                        <div class="soluong">
+                            <p>@item.soluong</p>
+                        </div>
+
+                    </td>
+                    <td>
+
+                        <div class="soluong">
+                            <p>@item.thanhtien</p>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+}

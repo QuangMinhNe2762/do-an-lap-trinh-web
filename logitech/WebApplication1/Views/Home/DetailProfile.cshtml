@@ -1,0 +1,123 @@
+﻿@model WebApplication1.Models.Account
+
+@{
+    ViewBag.Title = "DetailProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<style>
+    .button {
+        text-align: center;
+    }
+
+    .btn {
+        border: none;
+    }
+
+    .turnoffborder {
+        border: none;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+</style>
+<link rel="stylesheet" href="~/css/DetailAccount.css" />
+<div class="wrapper">
+    <div class="box">
+        <div class="col-11 mx-auto profile">
+            <div class="profile">
+                @using (Html.BeginForm("updateProfile", "Home",new {Model.MUserName }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="py-3 px-2 px-lg-4 py-lg-5">
+                        <div class="title" style="margin-bottom:50px">
+                            <span>
+                                <h2>Detail Profile</h2>
+                            </span>
+                        </div>
+                        <div class="introduce">
+
+                            <div class="avatar">
+                                <img name="avatar" style="margin-left:50px;border-radius:50%" width="200px" height="200px" src="~/Content/img/avatar/@Html.DisplayFor(model => model.avatar)">
+                                <input name="avatar" type="file" id="avatar" />
+                                <label id="addavatar" style="visibility: hidden; padding: 10px; padding-bottom: 0px; border-radius: 90px; background: #00D5FF; " for="avatar"><img src="~/Content/img/index/add-image.png" /></label>
+                                <hr style="margin:auto">
+                            </div>
+                            <div class="content-name">
+                                <h2 style="">@Html.TextBoxFor(model => model.tenUser, new { @class = "turnoffborder", @style = "font-size:50px;text-align:center", id = "name", @disabled = "disabled" })</h2>
+                            </div>
+                            <div class="content">
+                                <div class="content-icon">
+                                    <pre>                         <img src="~/Content/img/index/iconPhone.png" style="height: 30px; width: 30px;" />          </pre>
+                                </div>
+                                <div class="content-result">
+                                    <p>@Html.TextBoxFor(model => model.sdt, new { @class = "turnoffborder", id = "sdt", @disabled = "disabled" })</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-icon">
+                                    <pre>                         <img src="~/Content/img/index/iconEmail.png" style="height: 30px; width: 30px;" />          </pre>
+                                </div>
+                                <div class="content-result">
+                                    <p>@Html.TextBoxFor(model => model.Email, new { @class = "turnoffborder", id = "email", @disabled = "disabled" })</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-icon">
+                                    <pre>                         <img src="~/Content/img/index/iconRole.png" style="height: 30px; width: 30px;" />          </pre>
+                                </div>
+                                <div class="content-result">
+                                    <p>@Html.DisplayFor(model => model.role)</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-icon">
+                                    <pre>                         <img src="~/Content/img/index/gender.png" style="height: 30px; width: 30px;" />          </pre>
+                                </div>
+                                <div class="content-result">
+                                    @*<p>@Html.TextBoxFor(model => model.gioitinh, new { @class = "turnoffborder", id = "gender", @disabled = "disabled" })</p>*@
+                                    @Html.DropDownListFor(model => model.gioitinh, (IEnumerable<SelectListItem>)(new[]
+                      {
+                                        new SelectListItem(){Text="Nam"},
+                                        new SelectListItem(){Text="Nữ"},
+                                    }), new { @class = "turnoffborder", id = "gender", @disabled = "disabled" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="button">
+                            <button type="submit" class="btn focus" style="width:100px;visibility:hidden" id="btnsave">save</button>
+                            <button type="button" class="btn forcus" style="width:100px" onclick="toggle()">Edit</button>
+                            @*<button type="submit" class="btn">Logout</button>*@
+                            <button type="submit" class="btn" disabled>
+                                @Html.ActionLink("Logout", "logout", new { name = Model.tenUser }, new { @style = "color:black" })
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function toggle() {
+        document.getElementById("name").disabled = !document.getElementById("name").disabled;
+        document.getElementById("sdt").disabled = !document.getElementById("sdt").disabled;
+        document.getElementById("email").disabled = !document.getElementById("email").disabled;
+        document.getElementById("gender").disabled = !document.getElementById("gender").disabled;
+        var a = document.getElementById("addavatar");
+        var b = document.getElementById("btnsave");
+        if (a.style.visibility === "hidden") {
+            a.style.visibility = "visible";
+        }
+        else {
+            a.style.visibility = "hidden";
+        }
+        if (b.style.visibility === "hidden") {
+            b.style.visibility = "visible";
+        }
+        else {
+            b.style.visibility = "hidden";
+        }
+    }
+</script>

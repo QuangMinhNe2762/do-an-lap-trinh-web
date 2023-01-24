@@ -1,0 +1,244 @@
+﻿@model IEnumerable<WebApplication1.Models.sanPham>
+
+@{
+    ViewBag.Title = "pageGioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    table {
+        width: 100%;
+        height: 100%;
+        margin-left: 50px;
+    }
+
+    th {
+        text-align: center;
+        width: 300px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .chieudaiten {
+        width: 100px;
+    }
+
+    td {
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+        font-size: 20px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    tr:hover td {
+        background-color: lightgray;
+    }
+
+    .anhSP {
+        margin-left: 150px;
+    }
+
+    .tenSP {
+        word-break: break-word;
+        padding: 10px;
+    }
+
+    input {
+        width: 50px;
+        border: none;
+        border-bottom: 2px solid black;
+        font-size: 20px;
+    }
+
+    /*input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }*/
+
+    .deletePr {
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    button {
+        border: none;
+        background-color: white;
+    }
+
+        button:hover {
+            background-color: rgb(200, 200, 200);
+        }
+
+    .spacebutton {
+        margin-right: 70px;
+    }
+
+    .khungTinhTien {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: rgb(230, 230, 230);
+        max-width: 500px;
+        margin-left: 32%;
+    }
+
+    .tenBang {
+        text-align: center;
+    }
+
+    #cost {
+        margin-right: 50px;
+        font-size: 25px;
+    }
+
+    .title {
+        text-align: center;
+        margin: 0 auto 80px;
+        position: relative;
+        line-height: 60px;
+        color: #555;
+        margin-bottom: 40px;
+    }
+
+        .title::after {
+            content: '';
+            background: #00D5FF;
+            width: 80px;
+            height: 5px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+    #tongsotien {
+        margin-left: 10%;
+    }
+
+    .khungbutton {
+        text-align: center;
+    }
+
+    .empty-cart {
+        text-align: center;
+    }
+
+    .paymentHis {
+        text-align: center;
+    }
+</style>
+<div class="khungMain">
+    @if (ViewBag.login != null)
+    {
+
+    <div class="paymentHis">
+        <button class="btn" disabled><a href="@Url.Action("paymentHis", "Home")">Payment history</a></button>
+    </div>
+    }
+    @if (ViewBag.gioHang.Count > 0)
+    {
+        int count = 0;
+        foreach (var item in ViewBag.gioHang)
+        {
+            <div class="khungGioHang">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Product</th>
+                        <th class="chieudaiten">Quantity</th>
+                        <th class="chieudaiten">Price</th>
+                        <th class="chieudaiten">Subtotal</th>
+                        <th style="text-align:left"><pre style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Remove          Buy</pre></th>
+                    </tr>
+                    <tr>
+                        <td class="doimau">
+                            <div class="anhSP">
+                                <img src="@Url.Content("~/Content/img/Products/" + item.anhSP)" width="100px" height="120px" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="tenSP">
+                                <p>
+                                    @item.tenSP
+                                </p>
+                            </div>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("updateThanhTien", "Home", new { item.maSP, item.giaSP }, FormMethod.Post))
+                            {
+                                <div class="soluong">
+                                    <input type="number" oninput="numberOnly(this.id);" value="@item.soluong" id="flight_number" name="number" onkeyup="this.value = minmax(this.value, 1, 10)" />
+                                    <button class="btn" style="margin:0;margin-top:10px">Refesh Subtotal</button>
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            <div class="giaPr">
+                                <p>$@item.giaSP</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="gia">
+                                <p>$@item.thanhTien</p>
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class="deletePr">
+                                <button class="spacebutton" disabled>
+                                    <a href='@Url.Action("removeAddedFrPageGioHang", "Home", new { item.maSP, item.tenSP, item.giaSP, item.anhSP, item.loaiSP, item.moTa })'><img src="~/Content/img/index/close.png"></a>
+                                </button>
+                                @*<button class="spacebutton" disabled><a href="@Url.Action("fillInformation", "Home", new { item.maSP, item.anhSP, item.thanhTien, item.tenSP, item.giaSP, item.loaiSP, item.moTa })"><img src="~/Content/img/index/check.png"></a></button>*@
+                                <button class="spacebutton" disabled><a href="@Url.Action("fillInformation", "Home", new {item.soluong, item.maSP, item.anhSP, item.thanhTien, item.tenSP, item.giaSP, item.loaiSP})"><img src="~/Content/img/index/check.png"></a></button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            count++;
+            if (count == ViewBag.gioHang.Count)
+            {
+                <div class="khungTinhTien">
+                    <div id="tenbang">
+                        <h2 class="title">Billing</h2>
+                    </div>
+                    <div id="tongsotien">
+                        <label id="cost">Total cost of all products:</label>
+                        <label id="cost" for="cost">$@ViewBag.tongTien</label>
+                    </div>
+                    <div class="khungbutton">
+                        <button class="btn">Buy All</button>
+                    </div>
+                </div>
+
+            }
+        }
+    }
+    else
+    {
+        <div class="empty-cart">
+            <img src="~/Content/img/index/cart-emty.png">
+            <p> giỏ hàng của bạn đang trống</p>
+            <button class="btn" type="submit">
+                @Html.ActionLink("đi mua sắm nào !", "ProDucts", "Home", new { @style = "color:black" })
+            </button>
+        </div>
+    }
+</div>
+<script>
+    function numberOnly(id) {
+        // Get element by id which passed as parameter within HTML element event
+        var element = document.getElementById(id);
+        // This removes any other character but numbers as entered by user
+        element.value = element.value.replace(/[^0 - 9] / gi, "");
+    }
+</script>
+<script type="text/javascript">
+    function minmax(value, min, max) {
+        if (parseInt(value) < min || isNaN(parseInt(value)))
+            return min;
+        else if (parseInt(value) > max)
+            return max;
+        else return value;
+    }
+</script>
+

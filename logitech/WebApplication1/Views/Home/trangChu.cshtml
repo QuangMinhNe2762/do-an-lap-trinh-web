@@ -1,0 +1,144 @@
+﻿@model IEnumerable<WebApplication1.Models.sanPham>
+@{
+    ViewBag.Title = "trangChu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<title>@ViewBag.Title</title>
+
+<!-----play your way------>
+<div class="playYourWay">
+    <div class="row">
+        <div class="col-2">
+            <div class="exploreNow">
+                <h1>PLAY YOUR WAY</h1>
+            </div>
+            <p style="color:#000" class="exploreNow">Stylish. Relax. Ready to play the game<br>Play at your peak level with a performance gaming device from Logitech G.</p>
+            <div class="exploreNow">
+                <a href="" class="btn">Explore Now &#8594;</a>
+            </div>
+        </div>
+        <div class="col-2">
+            <img src="~/Content/img/index/play_your_way-removebg-preview.png" width="800px" height="600px">
+        </div>
+    </div>
+</div>
+<!----- featured categories ------>
+<div class="categories">
+    <div class="small-container">
+        <h2 class="title">Most Used</h2>
+        <div class="row">
+            @foreach (var item in ViewBag.ListMostUsed)
+            {
+                <div class="col-4">
+                    <a href='@Url.Action("ProductDetail", "Home",new {item.tenSP,item.maSP,item.loaiSP,item.giaSP,item.anhSP,item.moTa,item.soluong})'><img src='@Url.Content("~/Content/img/Products/" + item.anhSP)' /></a>
+                    <a href='@Url.Action("ProductDetail", "Home",new {item.tenSP,item.maSP,item.loaiSP,item.giaSP,item.anhSP,item.moTa,item.soluong})'><h4>@item.tenSP</h4></a>
+                    <p>$@item.giaSP</p>
+                    <p>Quantity:@item.soluong</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!----- featured products ------>
+<div class="small-container">
+    <h2 class="title">Featured Products</h2>
+    <div class="row">
+        @foreach (var item in ViewBag.ListFeaturedProDuct)
+        {
+            <div class="col-4">
+                <a href='@Url.Action("ProductDetail", "Home",new {item.tenSP,item.maSP,item.loaiSP,item.giaSP,item.anhSP,item.moTa,item.soluong})'><img src='@Url.Content("~/Content/img/Products/" + item.anhSP)' /></a>
+                <a href='@Url.Action("ProductDetail", "Home",new {item.tenSP,item.maSP,item.loaiSP,item.giaSP,item.anhSP,item.moTa,item.soluong})'><h4>@item.tenSP</h4></a>
+                <p>$@item.giaSP</p>
+                <p>Quantity:@item.soluong</p>
+
+            </div>
+        }
+    </div>
+    <!-----List featured products ------>
+    <h2 class="title">Latest Products</h2>
+    <div class="row">
+        @{
+            int row = 0;
+            foreach (var item in Model)
+            {
+                if (row < 8)
+                {
+                    <div class="col-4">
+                        <a href='@Url.Action("ProductDetail", "Home",new {item.tenSP,item.maSP,item.loaiSP,item.giaSP,item.anhSP,item.moTa,item.soluong})'><img src='@Url.Content("~/Content/img/Products/" + Html.DisplayFor(modelItem => item.anhSP))' /></a>
+                        <a href='@Url.Action("ProductDetail", "Home",new {item.tenSP,item.maSP,item.loaiSP,item.giaSP,item.anhSP,item.moTa,item.soluong})'><h4>@Html.DisplayFor(modelItem => item.tenSP)</h4></a>
+                        <p>$@item.giaSP</p>
+                        <p>Quantity:@item.soluong</p>
+
+                    </div>
+                    row++;
+                }
+            }
+        }
+    </div>
+</div>
+<!----- offer ------>
+<div class="offer">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-2">
+                <img src="~/Content/img/index/IMMERSE1.png" class="offer-img">
+            </div>
+            <div class="col-2">
+                <p>IMMERSE GAMING | LOGITECH G</p>
+                <h1>PERSONALIZED SPATIAL AUDIO FOR ALL PC GAMES</h1>
+                <small>Experience personalized spatial audio on any PC game using your existing headset. Hear audio above, around, and behind you with unparalleled depth and realism. Hone your senses for faster reaction times and sharpened accuracy.</small><br>
+                <a href="" class="btn">DETAIL &#8594;</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!----- testimonial ------>
+<div class="testimonial">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-3">
+                <p>Under Bracken Darrell's 10-year leadership as president and CEO, Logitech has reinvented itself as an award-winning design company, an industry force in pursuit of a sustainable and equitable world and is a leading performer on the Swiss SIX Stock Exchange and several Nasdaq Global Options Markets. During the same period, the company's net sales doubled and profits (net income) more than 13 times.</p>
+
+                <img src="~/Content/img/index/AnyConv.com__user1.png">
+                <h3>BRACKEN DARRELL</h3>
+            </div>
+            <div class="col-3">
+                <p>Samantha Harnett As Logitech Global Operations Lead, Prakash Arunkundrum is responsible for all manufacturing, global supply chain, sourcing, and product quality operations. Prakash is also responsible for driving the strategy and execution of Logitech's sustainability initiatives and delivering on Logitech's sustainability commitments in global products and operations.</p>
+
+                <img src="~/Content/img/index/AnyConv.com__user3 (1).png">
+                <h3>SAMANTHA HARNETT</h3>
+            </div>
+            <div class="col-3">
+                <p>As CFO of Logitech, Nate Olmstead is responsible for the financial strategies of the company and the global financial institution. He manages more than $2 and a half billion in consolidated revenue (US), taxes, treasury, accounting, financial planning and analysis, and liaises with international shareholders dealing in equities. Logitech shares on the SIX Swiss Exchange and Nasdaq Global Options Market.</p>
+
+                <img src="~/Content/img/index/AnyConv.com__user3 (2).png">
+                <h3>NATE OLMSTEAD</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!----- brands ------>
+<div class="brands">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-5">
+                <img src="~/Content/img/index/logo-godrej.png">
+            </div>
+            <div class="col-5">
+                <img src="~/Content/img/index/logo-oppo.png">
+            </div>
+            <div class="col-5">
+                <img src="~/Content/img/index/logo-paypal.png">
+            </div>
+            <div class="col-5">
+                <img src="~/Content/img/index/logo-philips.png">
+            </div>
+            <div class="col-5">
+                <img src="~/Content/img/index/logo-white.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+
